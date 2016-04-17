@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RollbarSharp", "src\RollbarSharp\RollbarSharp.csproj", "{43A8B009-CA64-4D25-845A-FE2A53890FBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RollbarSharp.Tests", "src\RollbarSharp.Tests\RollbarSharp.Tests.csproj", "{898D9D95-D956-4284-82D5-6BFDBFDE14EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RollbarSharp.Mvc4Test", "src\RollbarSharp.Mvc4Test\RollbarSharp.Mvc4Test.csproj", "{18636614-E998-4A78-86A4-37BFA9300F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6032F3FA-8766-4509-9165-B3A8FC73CCA2}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

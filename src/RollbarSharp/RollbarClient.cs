@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RollbarSharp.Builders;
 using RollbarSharp.Serialization;
+using System.Web;
 
 namespace RollbarSharp
 {
@@ -17,6 +18,11 @@ namespace RollbarSharp
     /// </summary>
     public class RollbarClient : IRollbarClient
     {
+        /// <summary>
+        /// Flag to determine if we are in a web context or not
+        /// </summary>
+        private readonly bool isInWebContext = false;
+
         /// <summary>
         /// Signature for the handler fired when the request is complete
         /// </summary>
@@ -48,6 +54,7 @@ namespace RollbarSharp
         {
             Configuration = configuration;
             NoticeBuilder = new DataModelBuilder(Configuration);
+            isInWebContext = (HttpContext.Current != null);
         }
 
         /// <summary>
@@ -225,6 +232,14 @@ namespace RollbarSharp
 
         protected Task HttpPost(string payload, object userParam)
         {
+            // if we are not in a web context, we need to wait on the task to complete or we run the risk of terminating the
+            // application before the new task is completed. In a web context this is unneeded.
+            if (!isInWebContext)
+            {
+                var task = Task.Factory.StartNew(() => HttpPostAsync(payload, userParam));
+                task.Wait();
+                return task;
+            }
             return Task.Factory.StartNew(() => HttpPostAsync(payload, userParam));
         }
 
