@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using Newtonsoft.Json;
-using Microsoft.Azure;
 
 namespace RollbarSharp
 {
@@ -176,7 +175,7 @@ namespace RollbarSharp
 
         protected static string GetSetting(string name, string fallback = null)
         {
-            var setting = CloudConfigurationManager.GetSetting(name);
+            var setting = ConfigurationManager.AppSettings[name].ToString();
             return string.IsNullOrEmpty(setting) ? fallback : setting;
         }
     }
